@@ -1,0 +1,161 @@
+<template>
+  <div class="h-100 d-flex flex-column justify-space-between">
+    <div>
+      <v-card-title class="text-center">BMI Calculator</v-card-title>
+
+      <div class="d-flex justify-space-between my-6 mx-10">
+        <v-card
+          style="width: 45%"
+          class="py-6 text-center rounded-lg pointer"
+          :class="selected === 'male' ? 'bg-teal' : 'custom-border'"
+          :variant="selected === 'male' ? 'solo' : 'outlined'"
+          :color="selected === 'male' ? 'white' : 'teal'"
+          @click="selected = 'male'"
+        >
+          <v-icon size="50">mdi-gender-male</v-icon>
+          <v-card-text class="pb-0 card-text"> Male </v-card-text>
+        </v-card>
+        <v-card
+          style="width: 45%"
+          class="py-6 text-center rounded-lg pointer"
+          :class="selected === 'female' ? 'bg-teal' : 'custom-border'"
+          :variant="selected === 'female' ? 'solo' : 'outlined'"
+          :color="selected === 'female' ? 'white' : 'teal'"
+          @click="selected = 'female'"
+        >
+          <v-icon size="50">mdi-gender-female</v-icon>
+          <v-card-text class="pb-0 card-text"> Female </v-card-text>
+        </v-card>
+      </div>
+    </div>
+
+    <div class="px-5 pt-3 bg-grey-lighten-3">
+      <v-card-text class="text-uppercase text-center pb-0">Height</v-card-text>
+
+      <v-card-title class="heading-text text-center pb-5">
+        {{ height }} cm
+      </v-card-title>
+      <v-slider
+        v-model="height"
+        color="teal"
+        :step="1"
+        max="218"
+        min="40"
+        track-color="grey"
+      ></v-slider>
+    </div>
+
+    <div>
+      <div class="d-flex justify-space-between my-6 mx-10">
+        <v-card style="width: 45%" class="py-6 text-center rounded-lg pointer">
+          <v-card-text class="pt-0 card-text text-teal pb-0">
+            Weight
+          </v-card-text>
+
+          <v-card-title
+            style="font-size: 35px"
+            class="text-center font-weight-regular"
+          >
+            {{ weight }}
+          </v-card-title>
+
+          <v-card-actions class="d-flex justify-space-between mx-3 pb-0">
+            <v-btn
+              icon=""
+              class="bg-teal"
+              size="28"
+              :ripple="false"
+              @click="decrement('weight')"
+            >
+              <v-icon size="18">mdi-minus</v-icon>
+            </v-btn>
+            <v-btn
+              icon=""
+              class="bg-teal"
+              size="28"
+              :ripple="false"
+              @click="increment('weight')"
+            >
+              <v-icon size="18">mdi-plus</v-icon>
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+
+        <v-card style="width: 45%" class="py-6 text-center rounded-lg pointer">
+          <v-card-text class="pt-0 card-text text-teal pb-0"> Age </v-card-text>
+          <v-card-title
+            style="font-size: 35px"
+            class="text-center font-weight-regular"
+          >
+            {{ age }}
+          </v-card-title>
+
+          <v-card-actions class="d-flex justify-space-between mx-3 pb-0">
+            <v-btn
+              icon=""
+              class="bg-teal"
+              size="28"
+              :ripple="false"
+              @click="decrement('age')"
+            >
+              <v-icon size="18">mdi-minus</v-icon>
+            </v-btn>
+            <v-btn
+              icon=""
+              class="bg-teal"
+              size="28"
+              :ripple="false"
+              @click="increment('age')"
+            >
+              <v-icon size="18">mdi-plus</v-icon>
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </div>
+    </div>
+
+    <v-btn class="bg-btnDark rounded-0" size="x-large"> Calculate </v-btn>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      selected: "male",
+      height: 180,
+      weight: 50,
+      age: 20,
+    };
+  },
+  methods: {
+    increment(incrementCase) {
+      switch (incrementCase) {
+        case "weight":
+          this.weight++;
+          break;
+        case "age":
+          this.age++;
+          break;
+        default:
+      }
+    },
+
+    decrement(decrementCase) {
+      switch (decrementCase) {
+        case "weight":
+          this.weight--;
+          break;
+        case "age":
+          this.age--;
+          break;
+        default:
+      }
+    },
+  },
+};
+</script>
+<style scoped>
+.custom-border {
+  border: 2px solid !important;
+}
+</style>
