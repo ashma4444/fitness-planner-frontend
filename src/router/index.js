@@ -33,6 +33,11 @@ const routes = [
     name: "form",
     component: () => import("@/pages/Form.vue"),
   },
+  {
+    path: "/get-plan",
+    name: "get-plan",
+    component: () => import("@/pages/GetPlans.vue"),
+  },
 ];
 
 const router = createRouter({

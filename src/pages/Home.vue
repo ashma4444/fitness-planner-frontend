@@ -22,7 +22,7 @@
               <v-btn
                 class="bg-teal mr-4"
                 :ripple="false"
-                @click="$router.push({ name: 'login' })"
+                @click="$router.push({ name: 'get-plan' })"
               >
                 Get Plan
               </v-btn>
@@ -98,7 +98,7 @@
         <v-btn
           class="bg-teal mr-4"
           :ripple="false"
-          @click="$router.push({ name: 'login' })"
+          @click="$router.push({ name: 'get-plan' })"
         >
           Get Plan
         </v-btn>

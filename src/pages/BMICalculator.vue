@@ -8,7 +8,7 @@
           style="width: 45%"
           class="py-6 text-center rounded-lg pointer"
           :class="selected === 'male' ? 'bg-teal' : 'custom-border'"
-          :variant="selected === 'male' ? 'solo' : 'outlined'"
+          :variant="selected === 'male' ? 'tonal' : 'outlined'"
           :color="selected === 'male' ? 'white' : 'teal'"
           @click="selected = 'male'"
         >
@@ -19,7 +19,7 @@
           style="width: 45%"
           class="py-6 text-center rounded-lg pointer"
           :class="selected === 'female' ? 'bg-teal' : 'custom-border'"
-          :variant="selected === 'female' ? 'solo' : 'outlined'"
+          :variant="selected === 'female' ? 'tonal' : 'outlined'"
           :color="selected === 'female' ? 'white' : 'teal'"
           @click="selected = 'female'"
         >
@@ -114,8 +114,22 @@
       </div>
     </div>
 
-    <v-btn class="bg-btnDark rounded-0" size="x-large"> Calculate </v-btn>
+    <v-btn class="bg-btnDark rounded-0" size="x-large" @click="calculateBmi">
+      Calculate
+    </v-btn>
   </div>
+
+  <v-dialog v-model="dialog">
+    <v-card class="rounded-xl pa-5">
+      <v-card-text class="text-center text-teal pb-0"
+        >Your calculated BMI:
+      </v-card-text>
+      <v-card-title class="text-center py-0" style="font-size: 40px">
+        {{ bmi }}
+      </v-card-title>
+      <v-card-text class="text-center">You are {{ analysis }}</v-card-text>
+    </v-card>
+  </v-dialog>
 </template>
 <script>
 export default {
@@ -125,6 +139,9 @@ export default {
       height: 180,
       weight: 50,
       age: 20,
+      bmi: 0,
+      dialog: false,
+      analysis: "",
     };
   },
   methods: {
@@ -149,6 +166,23 @@ export default {
           this.age--;
           break;
         default:
+      }
+    },
+
+    calculateBmi() {
+      // _bmi = (weight / pow(height / 100, 2));
+      this.bmi = this.weight / Math.pow(this.height / 100, 2);
+      this.bmi = this.bmi.toFixed(3);
+      // Math.round()
+      this.dialog = true;
+      if (this.bmi < 18.5) {
+        this.analysis = "Underweight";
+      } else if (this.bmi > 18.5 && this.bmi < 24.9) {
+        this.analysis = "Normal weight";
+      } else if (this.bmi > 25 && this.bmi < 29.9) {
+        this.analysis = "Overweight";
+      } else {
+        this.analysis = "Obesity";
       }
     },
   },
