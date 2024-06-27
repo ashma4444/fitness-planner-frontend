@@ -2,6 +2,9 @@
   <div class="h-100 d-flex flex-column justify-space-between">
     <div>
       <v-card-title class="text-center">BMI Calculator</v-card-title>
+      <v-card-subtitle class="text-center mb-10">
+        Success starts with self-discipline
+      </v-card-subtitle>
 
       <div class="d-flex justify-space-between my-6 mx-10">
         <v-card
@@ -127,7 +130,13 @@
       <v-card-title class="text-center py-0" style="font-size: 40px">
         {{ bmi }}
       </v-card-title>
-      <v-card-text class="text-center">You are {{ analysis }}</v-card-text>
+      <v-card-text class="text-center text-capitalize">
+        You are {{ analysis }}
+      </v-card-text>
+
+      <v-btn class="bg-teal" :ripple="false" @click="goToExercisePlan">
+        Get Exercise Plan
+      </v-btn>
     </v-card>
   </v-dialog>
 </template>
@@ -176,14 +185,17 @@ export default {
       // Math.round()
       this.dialog = true;
       if (this.bmi < 18.5) {
-        this.analysis = "Underweight";
+        this.analysis = "underweight";
       } else if (this.bmi > 18.5 && this.bmi < 24.9) {
-        this.analysis = "Normal weight";
+        this.analysis = "normal";
       } else if (this.bmi > 25 && this.bmi < 29.9) {
-        this.analysis = "Overweight";
+        this.analysis = "overweight";
       } else {
-        this.analysis = "Obesity";
+        this.analysis = "obesity";
       }
+    },
+    goToExercisePlan() {
+      this.$router.push({ path: `/get-exercise-plan/${this.analysis}` });
     },
   },
 };

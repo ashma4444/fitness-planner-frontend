@@ -7,7 +7,6 @@
       :class="$vuetify.display.smAndDown ? 'd-block ' : 'd-none'"
       floating
     >
-      hii
     </v-navigation-drawer>
 
     <v-main>

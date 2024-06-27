@@ -22,18 +22,9 @@
               <v-btn
                 class="bg-teal mr-4"
                 :ripple="false"
-                @click="$router.push({ name: 'get-plan' })"
+                @click="$router.push({ name: 'register' })"
               >
-                Get Plan
-              </v-btn>
-
-              <v-btn
-                :ripple="false"
-                variant="outlined"
-                color="teal"
-                @click="$router.push({ name: 'calculate' })"
-              >
-                <span class="text-white"> Calculate BMI </span>
+                Get Started
               </v-btn>
             </div>
           </div>
@@ -98,18 +89,9 @@
         <v-btn
           class="bg-teal mr-4"
           :ripple="false"
-          @click="$router.push({ name: 'get-plan' })"
+          @click="$router.push({ name: 'register' })"
         >
-          Get Plan
-        </v-btn>
-
-        <v-btn
-          :ripple="false"
-          variant="outlined"
-          color="teal"
-          @click="$router.push({ name: 'calculate' })"
-        >
-          <span class="text-white"> Calculate BMI </span>
+          Get Started
         </v-btn>
       </div>
       <!-- <div class="mt-10"></div> -->

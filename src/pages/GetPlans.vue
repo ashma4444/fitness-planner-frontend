@@ -14,7 +14,7 @@
       </v-img>
     </v-card>
     <v-row class="mt-8">
-      <v-col cols="12" v-for="card in cards">
+      <v-col cols="12" v-for="card in cards" v-if="!isTrainer">
         <v-card
           class="mx-5 mb-3"
           rel="noopener"
@@ -27,6 +27,46 @@
           </template>
           <template v-slot:title>
             <v-card-title> {{ card.title }} </v-card-title>
+          </template>
+        </v-card>
+      </v-col>
+      <v-col cols="12" v-if="isTrainer">
+        <v-card
+          class="mx-5 mb-3"
+          rel="noopener"
+          subtitle="Rate the diet"
+          @click="$router.push({ name: 'rate' })"
+          :ripple="false"
+        >
+          <template v-slot:prepend>
+            <v-btn
+              class="ma-2"
+              color="purple-darken-4"
+              icon="mdi-account-check"
+            ></v-btn>
+          </template>
+          <template v-slot:title>
+            <v-card-title> Rate Diet </v-card-title>
+          </template>
+        </v-card>
+      </v-col>
+      <v-col cols="12" v-if="isTrainer">
+        <v-card
+          class="mx-5 mb-3"
+          rel="noopener"
+          subtitle="Rate the exercise"
+          @click="$router.push({ name: 'rate' })"
+          :ripple="false"
+        >
+          <template v-slot:prepend>
+            <v-btn
+              class="ma-2"
+              color="pink-darken-4"
+              icon="mdi-account-check"
+            ></v-btn>
+          </template>
+          <template v-slot:title>
+            <v-card-title> Rate Exercise </v-card-title>
           </template>
         </v-card>
       </v-col>
@@ -52,27 +92,25 @@ export default {
         },
         {
           id: 2,
-          title: "Calculate BMI",
-          subtitle: "Check out the bmi calculator",
-          icon: "mdi-all-inclusive",
-          color: "amber-darken-4",
-        },
-        {
-          id: 3,
           title: "Get diet plan",
           subtitle: "Check out the diet planner",
           icon: "mdi-food-apple",
           color: "light-green-darken-2",
         },
         {
-          id: 4,
+          id: 3,
           title: "Get exercise plan",
           subtitle: "Check out the exercise planner",
           icon: "mdi-weight-lifter",
           color: "cyan-darken-2",
         },
       ],
+      isTrainer: false,
     };
+  },
+  created() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    this.isTrainer = user.isTrainer;
   },
   methods: {
     changeRoute(id) {
@@ -81,13 +119,10 @@ export default {
           this.$router.push({ name: "calculate" });
           break;
         case 2:
-          console.log("Apples are $0.30 each.");
+          this.$router.push({ name: "get-diet-plan" });
           break;
         case 3:
-          console.log("Mangoes are $1.00 each.");
-          break;
-        case 4:
-          console.log("Mangoes are $1.00 each.");
+          this.$router.push({ path: "/get-exercise-plan/normal" });
           break;
         default:
       }
